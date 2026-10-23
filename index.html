@@ -183,7 +183,7 @@
           <p class="mt-6 text-sm font-medium text-ink/50">Free to express interest. No obligation to list.</p>
         </div>
         <div class="bg-white rounded-2xl border border-ink/10 shadow-sm p-6 sm:p-8">
-          <h3 class="text-xl font-semibold">Become a Founding Host</h3>
+          <h3 id="host-form-heading" class="text-xl font-semibold">Become a Founding Host</h3>
           <form id="host-form" class="mt-6 space-y-4" novalidate>
             <div>
               <label for="host-name" class="block text-sm font-medium mb-1.5">Name</label>
@@ -211,6 +211,13 @@
             <p class="form-status text-sm text-center hidden"></p>
             <p class="text-xs text-ink/50 text-center">Expressing interest is not a property listing. We&rsquo;ll only email you about Vayzilo&rsquo;s launch. See our <a href="#" onclick="openPrivacy(event)" class="underline">privacy notice</a>.</p>
           </form>
+          <div id="host-thanks" class="hidden text-center py-10">
+            <div class="w-14 h-14 rounded-full bg-primary/10 text-primary flex items-center justify-center mx-auto">
+              <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+            </div>
+            <h3 class="mt-4 text-2xl font-bold">Thank you!</h3>
+            <p class="mt-2 text-ink/70 leading-relaxed">Welcome aboard — you&rsquo;re on the founding-host list. We&rsquo;ll be in touch as early access opens.</p>
+          </div>
         </div>
       </div>
     </div>
@@ -238,6 +245,13 @@
         <button type="submit" class="w-full bg-primary text-white font-semibold py-3.5 rounded-full hover:bg-primarydark">Join the Traveler Waitlist</button>
         <p class="form-status text-sm text-center hidden"></p>
       </form>
+      <div id="traveler-thanks" class="hidden mt-9 bg-white rounded-2xl border border-ink/10 shadow-sm p-6 sm:p-8 text-center">
+        <div class="w-14 h-14 rounded-full bg-primary/10 text-primary flex items-center justify-center mx-auto">
+          <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+        </div>
+        <h3 class="mt-4 text-2xl font-bold">Thank you!</h3>
+        <p class="mt-2 text-ink/70 leading-relaxed">You&rsquo;re on the traveler waitlist — we&rsquo;ll email you as Vayzilo prepares to launch.</p>
+      </div>
     </div>
   </section>
 
@@ -343,10 +357,16 @@
           const result = await res.json().catch(() => ({}));
           if (!res.ok || result.success === 'false' || result.success === false) throw new Error('submit failed');
           form.reset();
-          status.textContent = kind === 'host'
-            ? "Welcome aboard! You're on the founding-host list — we'll be in touch as early access opens."
-            : "You're on the list! We'll email you as Vayzilo prepares to launch.";
-          status.className = 'form-status text-sm text-center text-primary font-medium';
+          if (kind === 'host') {
+            const heading = document.getElementById('host-form-heading');
+            if (heading) heading.classList.add('hidden');
+          }
+          form.classList.add('hidden');
+          const thanks = document.getElementById(kind + '-thanks');
+          if (thanks) {
+            thanks.classList.remove('hidden');
+            thanks.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
         } catch (err) {
           status.textContent = "Something went wrong submitting the form. Please try again in a moment.";
           status.className = 'form-status text-sm text-center text-red-600 font-medium';
