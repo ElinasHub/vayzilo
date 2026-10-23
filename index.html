@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vayzilo — Unique Stays, Direct Bookings</title>
+  <meta name="description" content="Vayzilo is the modern alternative to Airbnb. Discover unique stays with lower fees, verified hosts, and direct booking.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
+          colors: {
+            primary: '#0F766E',
+            accent: '#F59E0B',
+            dark: '#0F172A'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { font-family: 'Inter', system-ui, sans-serif; }
+    .listing-card:hover { transform: translateY(-4px); transition: all 0.2s; }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-900">
+  <!-- Header -->
+  <header class="bg-white border-b sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+            <span class="text-white font-bold text-lg">V</span>
+          </div>
+          <span class="text-xl font-bold tracking-tight">Vayzilo</span>
+        </div>
+        <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
+          <a href="#stays" class="hover:text-primary">Explore</a>
+          <a href="#how" class="hover:text-primary">How it works</a>
+          <a href="#hosts" class="hover:text-primary">Become a host</a>
+        </nav>
+        <div class="flex items-center gap-3">
+          <button onclick="showAuth('login')" class="text-sm font-medium hover:text-primary">Log in</button>
+          <button onclick="showAuth('signup')" class="bg-primary text-white text-sm font-medium px-4 py-2 rounded-full hover:bg-teal-700">Sign up</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="relative bg-gradient-to-br from-primary to-teal-800 text-white">
+    <div class="max-w-7xl mx-auto px-4 py-20 sm:py-28">
+      <div class="max-w-3xl">
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight">Stay unique.<br>Book direct.</h1>
+        <p class="mt-4 text-lg text-teal-100">Vayzilo is the smarter alternative to Airbnb. Lower fees, verified hosts, and exceptional stays — all in one place.</p>
+      </div>
+
+      <!-- Search Bar -->
+      <div class="mt-10 bg-white rounded-2xl shadow-xl p-2 max-w-4xl">
+        <div class="flex flex-col md:flex-row gap-2">
+          <div class="flex-1 px-4 py-3">
+            <label class="block text-xs font-semibold text-gray-500 uppercase">Where</label>
+            <input id="search-location" type="text" placeholder="Search destinations" class="w-full text-gray-900 placeholder-gray-400 outline-none text-base">
+          </div>
+          <div class="flex-1 px-4 py-3 border-t md:border-t-0 md:border-l">
+            <label class="block text-xs font-semibold text-gray-500 uppercase">Check-in</label>
+            <input id="search-checkin" type="date" class="w-full text-gray-900 outline-none text-base">
+          </div>
+          <div class="flex-1 px-4 py-3 border-t md:border-t-0 md:border-l">
+            <label class="block text-xs font-semibold text-gray-500 uppercase">Check-out</label>
+            <input id="search-checkout" type="date" class="w-full text-gray-900 outline-none text-base">
+          </div>
+          <div class="flex-1 px-4 py-3 border-t md:border-t-0 md:border-l">
+            <label class="block text-xs font-semibold text-gray-500 uppercase">Guests</label>
+            <select id="search-guests" class="w-full text-gray-900 outline-none text-base bg-transparent">
+              <option>1 guest</option>
+              <option>2 guests</option>
+              <option>3 guests</option>
+              <option>4 guests</option>
+              <option>5+ guests</option>
+            </select>
+          </div>
+          <button onclick="performSearch()" class="bg-primary hover:bg-teal-700 text-white font-semibold px-8 py-4 rounded-xl md:rounded-r-xl flex items-center justify-center gap-2">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+            Search
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Categories -->
+  <section class="max-w-7xl mx-auto px-4 py-8">
+    <div class="flex gap-4 overflow-x-auto pb-2 scrollbar-hide">
+      <button onclick="filterCategory('all')" class="category-btn flex-shrink-0 px-5 py-2.5 rounded-full bg-primary text-white text-sm font-medium">All stays</button>
+      <button onclick="filterCategory('beach')" class="category-btn flex-shrink-0 px-5 py-2.5 rounded-full bg-white border text-sm font-medium hover:border-primary">Beach</button>
+      <button onclick="filterCategory('mountain')" class="category-btn flex-shrink-0 px-5 py-2.5 rounded-full bg-white border text-sm font-medium hover:border-primary">Mountain</button>
+      <button onclick="filterCategory('city')" class="category-btn flex-shrink-0 px-5 py-2.5 rounded-full bg-white border text-sm font-medium hover:border-primary">City</button>
+      <button onclick="filterCategory('unique')" class="category-btn flex-shrink-0 px-5 py-2.5 rounded-full bg-white border text-sm font-medium hover:border-primary">Unique</button>
+      <button onclick="filterCategory('luxury')" class="category-btn flex-shrink-0 px-5 py-2.5 rounded-full bg-white border text-sm font-medium hover:border-primary">Luxury</button>
+    </div>
+  </section>
+
+  <!-- Listings -->
+  <section id="stays" class="max-w-7xl mx-auto px-4 py-6">
+    <h2 class="text-2xl font-bold mb-6">Featured stays</h2>
+    <div id="listings-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"></div>
+    <p id="no-results" class="hidden text-center text-gray-500 py-12">No stays match your search. Try different filters.</p>
+  </section>
+
+  <!-- How it works -->
+  <section id="how" class="bg-white py-16 border-t">
+    <div class="max-w-7xl mx-auto px-4">
+      <h2 class="text-3xl font-bold text-center mb-12">Why choose Vayzilo?</h2>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="text-center">
+          <div class="w-14 h-14 bg-teal-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+            <span class="text-2xl">💸</span>
+          </div>
+          <h3 class="font-semibold text-lg">Lower fees</h3>
+          <p class="text-gray-600 mt-2">Hosts pay just 5%. Guests pay 0% service fee. More money stays with the people who matter.</p>
+        </div>
+        <div class="text-center">
+          <div class="w-14 h-14 bg-teal-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+            <span class="text-2xl">✅</span>
+          </div>
+          <h3 class="font-semibold text-lg">Verified hosts</h3>
+          <p class="text-gray-600 mt-2">Every host is identity-verified. Every stay is reviewed. Book with confidence.</p>
+        </div>
+        <div class="text-center">
+          <div class="w-14 h-14 bg-teal-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+            <span class="text-2xl">🏡</span>
+          </div>
+          <h3 class="font-semibold text-lg">Unique stays</h3>
+          <p class="text-gray-600 mt-2">From treehouses to design villas — find places that feel special, not generic.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Host CTA -->
+  <section id="hosts" class="bg-dark text-white py-16">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+      <h2 class="text-3xl font-bold">Ready to host on Vayzilo?</h2>
+      <p class="mt-3 text-gray-300">List your place in minutes. Keep more of what you earn. Connect with travelers who value quality.</p>
+      <button onclick="showHostForm()" class="mt-6 bg-accent hover:bg-amber-500 text-dark font-semibold px-8 py-3 rounded-full">List your space</button>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-white border-t py-10">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-500">
+      <div class="flex items-center gap-2">
+        <div class="w-6 h-6 bg-primary rounded flex items-center justify-center"><span class="text-white text-xs font-bold">V</span></div>
+        <span class="font-medium text-gray-700">Vayzilo</span>
+      </div>
+      <div>© 2026 Vayzilo. All rights reserved. An alternative to traditional short-term rental platforms.</div>
+      <div class="flex gap-4">
+        <a href="#" class="hover:text-primary">Privacy</a>
+        <a href="#" class="hover:text-primary">Terms</a>
+        <a href="#" class="hover:text-primary">Support</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Detail Modal -->
+  <div id="detail-modal" class="fixed inset-0 bg-black/50 hidden z-50 overflow-y-auto">
+    <div class="min-h-screen flex items-center justify-center p-4">
+      <div class="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+        <div id="modal-content"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Auth Modal -->
+  <div id="auth-modal" class="fixed inset-0 bg-black/50 hidden z-50">
+    <div class="min-h-screen flex items-center justify-center p-4">
+      <div class="bg-white rounded-2xl max-w-md w-full p-8">
+        <h3 id="auth-title" class="text-2xl font-bold mb-6">Log in</h3>
+        <input type="email" placeholder="Email" class="w-full border rounded-lg px-4 py-3 mb-3 outline-none focus:border-primary">
+        <input type="password" placeholder="Password" class="w-full border rounded-lg px-4 py-3 mb-6 outline-none focus:border-primary">
+        <button onclick="closeAuth()" class="w-full bg-primary text-white py-3 rounded-lg font-medium">Continue</button>
+        <p class="text-center text-sm text-gray-500 mt-4"><button onclick="closeAuth()" class="underline">Close</button></p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const listings = [
+      {
+        id: 1,
+        title: "Oceanfront Villa with Infinity Pool",
+        location: "Malibu, California",
+        category: "beach",
+        price: 485,
+        rating: 4.98,
+        reviews: 127,
+        guests: 8,
+        bedrooms: 4,
+        image: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=800&q=80",
+        description: "Stunning contemporary villa perched on the cliffs of Malibu. Floor-to-ceiling glass, private infinity pool overlooking the Pacific, and direct beach access. Perfect for groups seeking luxury and privacy."
+      },
+      {
+        id: 2,
+        title: "Cozy A-Frame Cabin in the Woods",
+        location: "Aspen, Colorado",
+        category: "mountain",
+        price: 220,
+        rating: 4.92,
+        reviews: 89,
+        guests: 4,
+        bedrooms: 2,
+        image: "https://images.unsplash.com/photo-1445019980597-93fa8acb246c?w=800&q=80",
+        description: "A charming A-frame nestled among aspens. Wood-burning fireplace, hot tub on the deck, and panoramic mountain views. Ideal for a romantic getaway or small family retreat."
+      },
+      {
+        id: 3,
+        title: "Designer Loft in SoHo",
+        location: "New York, New York",
+        category: "city",
+        price: 310,
+        rating: 4.85,
+        reviews: 214,
+        guests: 3,
+        bedrooms: 1,
+        image: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=800&q=80",
+        description: "Industrial-chic loft with 14-foot ceilings, exposed brick, and designer furnishings. Walking distance to the best restaurants, galleries, and nightlife in Manhattan."
+      },
+      {
+        id: 4,
+        title: "Treehouse Retreat",
+        location: "Portland, Oregon",
+        category: "unique",
+        price: 175,
+        rating: 4.97,
+        reviews: 64,
+        guests: 2,
+        bedrooms: 1,
+        image: "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=800&q=80",
+        description: "Sleep among the trees in this beautifully crafted treehouse. Elevated deck, rainfall shower, and total seclusion just 30 minutes from the city."
+      },
+      {
+        id: 5,
+        title: "Modern Beach House",
+        location: "Tulum, Mexico",
+        category: "beach",
+        price: 340,
+        rating: 4.94,
+        reviews: 156,
+        guests: 6,
+        bedrooms: 3,
+        image: "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800&q=80",
+        description: "Minimalist architecture meets Caribbean jungle. Private cenote access, rooftop plunge pool, and steps from the white sand beach."
+      },
+      {
+        id: 6,
+        title: "Alpine Chalet with Hot Tub",
+        location: "Zermatt, Switzerland",
+        category: "mountain",
+        price: 620,
+        rating: 4.99,
+        reviews: 41,
+        guests: 10,
+        bedrooms: 5,
+        image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80",
+        description: "Luxury chalet with Matterhorn views. Sauna, outdoor hot tub, and ski-in/ski-out access. Perfect for large groups."
+      },
+      {
+        id: 7,
+        title: "Historic Townhouse",
+        location: "Charleston, South Carolina",
+        category: "city",
+        price: 265,
+        rating: 4.88,
+        reviews: 98,
+        guests: 6,
+        bedrooms: 3,
+        image: "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&q=80",
+        description: "Elegantly restored 19th-century townhouse in the heart of the Historic District. Courtyard garden and walkable to everything."
+      },
+      {
+        id: 8,
+        title: "Glass House in the Desert",
+        location: "Joshua Tree, California",
+        category: "unique",
+        price: 290,
+        rating: 4.96,
+        reviews: 73,
+        guests: 4,
+        bedrooms: 2,
+        image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&q=80",
+        description: "Architectural glass pavilion surrounded by desert landscape. Stargazing deck, outdoor bathtub, and complete privacy."
+      }
+    ];
+
+    let currentFilter = 'all';
+    let filteredListings = [...listings];
+
+    function renderListings(list) {
+      const grid = document.getElementById('listings-grid');
+      const noResults = document.getElementById('no-results');
+      if (list.length === 0) {
+        grid.innerHTML = '';
+        noResults.classList.remove('hidden');
+        return;
+      }
+      noResults.classList.add('hidden');
+      grid.innerHTML = list.map(l => `
+        <div class="listing-card bg-white rounded-2xl overflow-hidden shadow-sm border hover:shadow-md cursor-pointer" onclick="openDetail(${l.id})">
+          <div class="aspect-[4/3] overflow-hidden">
+            <img src="${l.image}" alt="${l.title}" class="w-full h-full object-cover">
+          </div>
+          <div class="p-4">
+            <div class="flex justify-between items-start">
+              <h3 class="font-semibold text-base leading-tight">${l.title}</h3>
+              <span class="flex items-center gap-1 text-sm">★ ${l.rating}</span>
+            </div>
+            <p class="text-sm text-gray-500 mt-1">${l.location}</p>
+            <p class="text-sm text-gray-500">${l.bedrooms} bedroom · ${l.guests} guests</p>
+            <p class="mt-2 font-semibold">$${l.price} <span class="font-normal text-gray-500">night</span></p>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function filterCategory(cat) {
+      currentFilter = cat;
+      document.querySelectorAll('.category-btn').forEach(btn => {
+        btn.className = 'category-btn flex-shrink-0 px-5 py-2.5 rounded-full bg-white border text-sm font-medium hover:border-primary';
+      });
+      event.target.className = 'category-btn flex-shrink-0 px-5 py-2.5 rounded-full bg-primary text-white text-sm font-medium';
+      applyFilters();
+    }
+
+    function performSearch() {
+      applyFilters();
+      document.getElementById('stays').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function applyFilters() {
+      const loc = document.getElementById('search-location').value.toLowerCase();
+      const guestsSelect = document.getElementById('search-guests').value;
+      const minGuests = parseInt(guestsSelect) || 1;
+
+      filteredListings = listings.filter(l => {
+        const matchCat = currentFilter === 'all' || l.category === currentFilter;
+        const matchLoc = !loc || l.location.toLowerCase().includes(loc) || l.title.toLowerCase().includes(loc);
+        const matchGuests = l.guests >= minGuests;
+        return matchCat && matchLoc && matchGuests;
+      });
+      renderListings(filteredListings);
+    }
+
+    function openDetail(id) {
+      const l = listings.find(x => x.id === id);
+      if (!l) return;
+      document.getElementById('modal-content').innerHTML = `
+        <div class="relative">
+          <button onclick="closeDetail()" class="absolute top-4 right-4 bg-white rounded-full w-10 h-10 flex items-center justify-center shadow z-10">✕</button>
+          <img src="${l.image}" class="w-full h-80 object-cover rounded-t-2xl">
+          <div class="p-6">
+            <div class="flex justify-between items-start">
+              <div>
+                <h2 class="text-2xl font-bold">${l.title}</h2>
+                <p class="text-gray-500 mt-1">${l.location} · ${l.bedrooms} bedrooms · ${l.guests} guests</p>
+              </div>
+              <div class="text-right">
+                <p class="text-2xl font-bold">$${l.price}<span class="text-base font-normal text-gray-500"> / night</span></p>
+                <p class="text-sm">★ ${l.rating} · ${l.reviews} reviews</p>
+              </div>
+            </div>
+            <p class="mt-4 text-gray-700 leading-relaxed">${l.description}</p>
+            <div class="mt-6 border-t pt-6">
+              <h3 class="font-semibold mb-3">Book this stay</h3>
+              <div class="grid grid-cols-2 gap-3">
+                <input type="date" class="border rounded-lg px-3 py-2" placeholder="Check-in">
+                <input type="date" class="border rounded-lg px-3 py-2" placeholder="Check-out">
+              </div>
+              <button onclick="alert('Booking request sent! (Demo)')" class="mt-4 w-full bg-primary text-white py-3 rounded-lg font-semibold">Request to book</button>
+              <p class="text-xs text-center text-gray-500 mt-2">You won't be charged yet. This is a demonstration.</p>
+            </div>
+          </div>
+        </div>
+      `;
+      document.getElementById('detail-modal').classList.remove('hidden');
+    }
+
+    function closeDetail() {
+      document.getElementById('detail-modal').classList.add('hidden');
+    }
+
+    function showAuth(type) {
+      document.getElementById('auth-title').textContent = type === 'login' ? 'Log in' : 'Sign up';
+      document.getElementById('auth-modal').classList.remove('hidden');
+    }
+
+    function closeAuth() {
+      document.getElementById('auth-modal').classList.add('hidden');
+    }
+
+    function showHostForm() {
+      alert('Host onboarding form would open here. In a full version, this leads to a multi-step listing creator.');
+    }
+
+    // Initial render
+    renderListings(listings);
+
+    // Close modals on background click
+    document.getElementById('detail-modal').addEventListener('click', e => {
+      if (e.target.id === 'detail-modal') closeDetail();
+    });
+    document.getElementById('auth-modal').addEventListener('click', e => {
+      if (e.target.id === 'auth-modal') closeAuth();
+    });
+  </script>
+</body>
+</html>
