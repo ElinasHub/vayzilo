@@ -23,10 +23,11 @@ Registrations are open: both forms POST to FormSubmit's AJAX endpoint, which ema
 
 ## Branding
 
-- Primary: deep teal `#0D716B` (dark variant `#0A5954`)
+- Primary: deep ocean teal `#0D5B56` (dark variant `#0A4741`)
+- Zero-commission section background: warm ivory `#F6EBDD`
+- Accent: muted golden amber `#D9A441` (hover `#BE8C34`) — used selectively for primary CTAs and small highlights
 - Background: warm off-white `#FAF9F6`
-- Text: charcoal `#20272A`
-- Accent: amber `#F59E0B`
+- Text: charcoal `#243333`
 - Positioning: **zero Vayzilo platform commissions** (not "fee-free" overall — payment processing and disclosed third-party costs still apply), transparent pricing, independent hosts, AI-powered discovery
 
 ## Deployment

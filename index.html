@@ -21,10 +21,13 @@
         extend: {
           fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
           colors: {
-            primary: '#0D716B',
-            primarydark: '#0A5954',
-            accent: '#F59E0B',
-            ink: '#20272A',
+            primary: '#0D5B56',
+            primarydark: '#0A4741',
+            accent: '#D9A441',
+            gold: '#D9A441',
+            golddark: '#BE8C34',
+            ivory: '#F6EBDD',
+            ink: '#243333',
             cream: '#FAF9F6'
           }
         }
@@ -86,11 +89,11 @@
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center">
       <div class="max-w-3xl">
         <p class="text-xs sm:text-sm font-semibold tracking-[0.2em] text-teal-200">A NEW WAY TO STAY — COMING SOON</p>
-        <h1 class="mt-4 text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.08] tracking-tight">Vacation Rentals. Reimagined for the <span class="text-amber-300">AI Era</span>.</h1>
+        <h1 class="mt-4 text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.08] tracking-tight">Vacation Rentals. Reimagined for the <span class="text-gold">AI Era</span>.</h1>
         <p class="mt-6 text-lg text-teal-50 leading-relaxed">Discover exceptional places to stay, connect with independent hosts, and enjoy transparent pricing.</p>
-        <p class="mt-3 text-lg text-teal-100/90 leading-relaxed">Vayzilo is building a new vacation rental marketplace with <strong class="font-bold text-amber-300">zero platform commissions</strong> and a smarter approach to travel discovery.</p>
+        <p class="mt-3 text-lg text-teal-100/90 leading-relaxed">Vayzilo is building a new vacation rental marketplace with <strong class="font-bold text-gold">zero platform commissions</strong> and a smarter approach to travel discovery.</p>
         <div class="mt-9 flex flex-col sm:flex-row gap-3">
-          <a href="#founding-hosts" class="inline-flex items-center justify-center bg-accent text-ink font-semibold px-8 py-4 rounded-full hover:bg-amber-400 text-base">Become a Founding Host</a>
+          <a href="#founding-hosts" class="inline-flex items-center justify-center bg-accent text-ink font-semibold px-8 py-4 rounded-full hover:bg-golddark text-base">Become a Founding Host</a>
           <a href="#early-access" class="inline-flex items-center justify-center border-2 border-white/80 text-white font-semibold px-8 py-4 rounded-full hover:bg-white hover:text-primarydark text-base">Join the Traveler Waitlist</a>
         </div>
         <p class="mt-6 text-sm text-teal-100/80">We&rsquo;re building something different. Be part of it from the beginning.</p>
@@ -103,21 +106,21 @@
   </section>
 
   <!-- Zero Commission Promise -->
-  <section class="bg-accent text-ink">
+  <section class="bg-ivory text-ink">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
       <p class="text-center text-xs sm:text-sm font-bold tracking-[0.25em]">THE VAYZILO PROMISE</p>
-      <h2 class="mt-3 text-center text-3xl sm:text-5xl font-extrabold tracking-tight">Zero platform commissions.</h2>
+      <h2 class="mt-3 text-center text-3xl sm:text-5xl font-extrabold tracking-tight text-primary">Zero platform commissions.</h2>
       <div class="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-8 text-center">
         <div>
-          <p class="text-6xl sm:text-7xl font-extrabold leading-none">0%</p>
+          <p class="text-6xl sm:text-7xl font-extrabold leading-none text-primary">0%</p>
           <p class="mt-2 font-semibold">commission on nightly rates</p>
         </div>
         <div>
-          <p class="text-6xl sm:text-7xl font-extrabold leading-none">0%</p>
+          <p class="text-6xl sm:text-7xl font-extrabold leading-none text-primary">0%</p>
           <p class="mt-2 font-semibold">commission on cleaning fees</p>
         </div>
         <div>
-          <p class="text-6xl sm:text-7xl font-extrabold leading-none">0%</p>
+          <p class="text-6xl sm:text-7xl font-extrabold leading-none text-primary">0%</p>
           <p class="mt-2 font-semibold">guest service fees</p>
         </div>
       </div>
@@ -229,7 +232,7 @@
           <input id="traveler-destination" name="destination" type="text" class="w-full border border-ink/20 rounded-lg px-4 py-3 outline-none focus:border-primary bg-white" placeholder="e.g. Florida, the mountains, Europe">
         </div>
         <label class="flex items-start gap-3 text-sm text-ink/70">
-          <input id="traveler-consent" name="consent" type="checkbox" required class="mt-1 w-4 h-4 accent-[#0D716B]">
+          <input id="traveler-consent" name="consent" type="checkbox" required class="mt-1 w-4 h-4 accent-[#0D5B56]">
           <span>Yes, email me about Vayzilo&rsquo;s launch and early access. I agree to the <a href="#" onclick="openPrivacy(event)" class="underline">privacy notice</a>.</span>
         </label>
         <button type="submit" class="w-full bg-primary text-white font-semibold py-3.5 rounded-full hover:bg-primarydark">Join the Traveler Waitlist</button>
