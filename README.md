@@ -19,7 +19,7 @@ The original marketplace shell code — search, category filters, listing cards,
 
 ## Form capture
 
-GitHub Pages is static hosting, so the two forms need an endpoint. Set `FORM_ENDPOINT` at the top of the script in `index.html` to a form-backend URL (e.g. Formspree) and both forms will POST there and show their confirmation messages. While it's empty, the forms explain that registration is opening shortly and do not pretend to save submissions.
+Registrations are open: both forms POST to FormSubmit's AJAX endpoint, which emails each submission to Elina (subject lines: "Vayzilo — Founding Host registration" / "Vayzilo — Traveler waitlist signup"). FormSubmit requires a one-time activation click in the email it sends on the first submission. If volume ever justifies it, swap `FORM_ENDPOINT` in `index.html` for a real database-backed capture.
 
 ## Branding
 
