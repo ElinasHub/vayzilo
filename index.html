@@ -3,171 +3,251 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vayzilo — Unique Stays, Direct Bookings</title>
-  <meta name="description" content="Vayzilo is the modern alternative to Airbnb. Discover unique stays with lower fees, verified hosts, and direct booking.">
+  <title>Vayzilo | The Next Generation of Vacation Rentals</title>
+  <meta name="description" content="Discover Vayzilo, an emerging vacation rental marketplace designed for zero platform commissions, transparent pricing, and AI-powered travel discovery. Join our early-access community.">
+  <meta property="og:title" content="Vayzilo | The Next Generation of Vacation Rentals">
+  <meta property="og:description" content="Vacation rentals with zero platform commissions, transparent pricing, and AI-powered discovery. Join our early-access community.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://vayzilo.com/">
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <script>
     tailwind.config = {
       theme: {
         extend: {
           fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
           colors: {
-            primary: '#0F766E',
+            primary: '#0D716B',
+            primarydark: '#0A5954',
             accent: '#F59E0B',
-            dark: '#0F172A'
+            ink: '#20272A',
+            cream: '#FAF9F6'
           }
         }
       }
     }
   </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Vayzilo",
+    "url": "https://vayzilo.com/",
+    "slogan": "Vacation Rentals. Reimagined for the AI Era.",
+    "description": "An emerging vacation rental marketplace designed for zero platform commissions, transparent pricing, and AI-powered travel discovery."
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Vayzilo",
+    "url": "https://vayzilo.com/"
+  }
+  </script>
   <style>
     body { font-family: 'Inter', system-ui, sans-serif; }
+    html { scroll-behavior: smooth; }
     .listing-card:hover { transform: translateY(-4px); transition: all 0.2s; }
   </style>
 </head>
-<body class="bg-gray-50 text-gray-900">
+<body class="bg-cream text-ink antialiased">
   <!-- Header -->
-  <header class="bg-white border-b sticky top-0 z-50">
+  <header class="bg-cream/95 backdrop-blur border-b border-ink/10 sticky top-0 z-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16">
-        <div class="flex items-center gap-2">
+        <a href="#" class="flex items-center gap-2">
           <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
             <span class="text-white font-bold text-lg">V</span>
           </div>
           <span class="text-xl font-bold tracking-tight">Vayzilo</span>
-        </div>
+        </a>
         <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
-          <a href="#stays" class="hover:text-primary">Explore</a>
-          <a href="#how" class="hover:text-primary">How it works</a>
-          <a href="#hosts" class="hover:text-primary">Become a host</a>
+          <a href="#how-it-works" class="hover:text-primary">How It Works</a>
+          <a href="#founding-hosts" class="hover:text-primary">For Hosts</a>
+          <a href="#vision" class="hover:text-primary">Our Vision</a>
+          <a href="#early-access" class="hover:text-primary">Join Early Access</a>
         </nav>
         <div class="flex items-center gap-3">
-          <button onclick="showAuth('login')" class="text-sm font-medium hover:text-primary">Log in</button>
-          <button onclick="showAuth('signup')" class="bg-primary text-white text-sm font-medium px-4 py-2 rounded-full hover:bg-teal-700">Sign up</button>
+          <a href="#founding-hosts" class="md:hidden text-sm font-semibold text-primary">For Hosts</a>
+          <a href="#early-access" class="bg-primary text-white text-sm font-semibold px-4 py-2 rounded-full hover:bg-primarydark">Join Early Access</a>
         </div>
       </div>
     </div>
   </header>
 
   <!-- Hero -->
-  <section class="relative bg-gradient-to-br from-primary to-teal-800 text-white">
-    <div class="max-w-7xl mx-auto px-4 py-20 sm:py-28">
+  <section class="bg-primarydark text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
       <div class="max-w-3xl">
-        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight">Stay unique.<br>Book direct.</h1>
-        <p class="mt-4 text-lg text-teal-100">Vayzilo is the smarter alternative to Airbnb. Lower fees, verified hosts, and exceptional stays — all in one place.</p>
-      </div>
-
-      <!-- Search Bar -->
-      <div class="mt-10 bg-white rounded-2xl shadow-xl p-2 max-w-4xl">
-        <div class="flex flex-col md:flex-row gap-2">
-          <div class="flex-1 px-4 py-3">
-            <label class="block text-xs font-semibold text-gray-500 uppercase">Where</label>
-            <input id="search-location" type="text" placeholder="Search destinations" class="w-full text-gray-900 placeholder-gray-400 outline-none text-base">
-          </div>
-          <div class="flex-1 px-4 py-3 border-t md:border-t-0 md:border-l">
-            <label class="block text-xs font-semibold text-gray-500 uppercase">Check-in</label>
-            <input id="search-checkin" type="date" class="w-full text-gray-900 outline-none text-base">
-          </div>
-          <div class="flex-1 px-4 py-3 border-t md:border-t-0 md:border-l">
-            <label class="block text-xs font-semibold text-gray-500 uppercase">Check-out</label>
-            <input id="search-checkout" type="date" class="w-full text-gray-900 outline-none text-base">
-          </div>
-          <div class="flex-1 px-4 py-3 border-t md:border-t-0 md:border-l">
-            <label class="block text-xs font-semibold text-gray-500 uppercase">Guests</label>
-            <select id="search-guests" class="w-full text-gray-900 outline-none text-base bg-transparent">
-              <option>1 guest</option>
-              <option>2 guests</option>
-              <option>3 guests</option>
-              <option>4 guests</option>
-              <option>5+ guests</option>
-            </select>
-          </div>
-          <button onclick="performSearch()" class="bg-primary hover:bg-teal-700 text-white font-semibold px-8 py-4 rounded-xl md:rounded-r-xl flex items-center justify-center gap-2">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-            Search
-          </button>
+        <p class="text-xs sm:text-sm font-semibold tracking-[0.2em] text-teal-200">A NEW WAY TO STAY — COMING SOON</p>
+        <h1 class="mt-4 text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.08] tracking-tight">Vacation Rentals. Reimagined for the AI Era.</h1>
+        <p class="mt-6 text-lg text-teal-50 leading-relaxed">Discover exceptional places to stay, connect with independent hosts, and enjoy transparent pricing.</p>
+        <p class="mt-3 text-lg text-teal-100/90 leading-relaxed">Vayzilo is building a new vacation rental marketplace with zero platform commissions and a smarter approach to travel discovery.</p>
+        <div class="mt-9 flex flex-col sm:flex-row gap-3">
+          <a href="#founding-hosts" class="inline-flex items-center justify-center bg-accent text-ink font-semibold px-8 py-4 rounded-full hover:bg-amber-400 text-base">Become a Founding Host</a>
+          <a href="#early-access" class="inline-flex items-center justify-center border-2 border-white/80 text-white font-semibold px-8 py-4 rounded-full hover:bg-white hover:text-primarydark text-base">Join the Traveler Waitlist</a>
         </div>
+        <p class="mt-6 text-sm text-teal-100/80">We&rsquo;re building something different. Be part of it from the beginning.</p>
       </div>
     </div>
   </section>
 
-  <!-- Categories -->
-  <section class="max-w-7xl mx-auto px-4 py-8">
-    <div class="flex gap-4 overflow-x-auto pb-2 scrollbar-hide">
-      <button onclick="filterCategory('all')" class="category-btn flex-shrink-0 px-5 py-2.5 rounded-full bg-primary text-white text-sm font-medium">All stays</button>
-      <button onclick="filterCategory('beach')" class="category-btn flex-shrink-0 px-5 py-2.5 rounded-full bg-white border text-sm font-medium hover:border-primary">Beach</button>
-      <button onclick="filterCategory('mountain')" class="category-btn flex-shrink-0 px-5 py-2.5 rounded-full bg-white border text-sm font-medium hover:border-primary">Mountain</button>
-      <button onclick="filterCategory('city')" class="category-btn flex-shrink-0 px-5 py-2.5 rounded-full bg-white border text-sm font-medium hover:border-primary">City</button>
-      <button onclick="filterCategory('unique')" class="category-btn flex-shrink-0 px-5 py-2.5 rounded-full bg-white border text-sm font-medium hover:border-primary">Unique</button>
-      <button onclick="filterCategory('luxury')" class="category-btn flex-shrink-0 px-5 py-2.5 rounded-full bg-white border text-sm font-medium hover:border-primary">Luxury</button>
-    </div>
-  </section>
-
-  <!-- Listings -->
-  <section id="stays" class="max-w-7xl mx-auto px-4 py-6">
-    <h2 class="text-2xl font-bold mb-6">Featured stays</h2>
-    <div id="listings-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"></div>
-    <p id="no-results" class="hidden text-center text-gray-500 py-12">No stays match your search. Try different filters.</p>
-  </section>
-
-  <!-- How it works -->
-  <section id="how" class="bg-white py-16 border-t">
-    <div class="max-w-7xl mx-auto px-4">
-      <h2 class="text-3xl font-bold text-center mb-12">Why choose Vayzilo?</h2>
-      <div class="grid md:grid-cols-3 gap-8">
-        <div class="text-center">
-          <div class="w-14 h-14 bg-teal-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
-            <span class="text-2xl">💸</span>
+  <!-- A Better Way to Stay -->
+  <section id="how-it-works" class="py-16 sm:py-24">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl sm:text-4xl font-bold text-center tracking-tight">A Better Way to Stay</h2>
+      <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-white rounded-2xl border border-ink/10 p-8 shadow-sm">
+          <div class="w-12 h-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" viewBox="0 0 24 24"><line x1="19" x2="5" y1="5" y2="19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></svg>
           </div>
-          <h3 class="font-semibold text-lg">Lower fees</h3>
-          <p class="text-gray-600 mt-2">Hosts pay just 5%. Guests pay 0% service fee. More money stays with the people who matter.</p>
+          <h3 class="mt-5 text-xl font-semibold">More for Hosts</h3>
+          <p class="mt-1 font-medium text-primary">Keep more of what you earn.</p>
+          <p class="mt-3 text-ink/70 leading-relaxed">No percentage-based platform commissions on nightly rates or cleaning fees. More control over your property, pricing, and guest experience.</p>
         </div>
-        <div class="text-center">
-          <div class="w-14 h-14 bg-teal-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
-            <span class="text-2xl">✅</span>
+        <div class="bg-white rounded-2xl border border-ink/10 p-8 shadow-sm">
+          <div class="w-12 h-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
           </div>
-          <h3 class="font-semibold text-lg">Verified hosts</h3>
-          <p class="text-gray-600 mt-2">Every host is identity-verified. Every stay is reviewed. Book with confidence.</p>
+          <h3 class="mt-5 text-xl font-semibold">Better for Travelers</h3>
+          <p class="mt-1 font-medium text-primary">Great stays. Clear expectations.</p>
+          <p class="mt-3 text-ink/70 leading-relaxed">Discover independently hosted properties with transparent pricing, clear house rules, and no surprise checkout expectations.</p>
         </div>
-        <div class="text-center">
-          <div class="w-14 h-14 bg-teal-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
-            <span class="text-2xl">🏡</span>
+        <div class="bg-white rounded-2xl border border-ink/10 p-8 shadow-sm">
+          <div class="w-12 h-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 3l1.9 5.6L19.5 10l-5.6 1.9L12 17.5l-1.9-5.6L4.5 10l5.6-1.4L12 3z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8L19 15z"/></svg>
           </div>
-          <h3 class="font-semibold text-lg">Unique stays</h3>
-          <p class="text-gray-600 mt-2">From treehouses to design villas — find places that feel special, not generic.</p>
+          <h3 class="mt-5 text-xl font-semibold">Built for AI Discovery</h3>
+          <p class="mt-1 font-medium text-primary">Travel planning is changing.</p>
+          <p class="mt-3 text-ink/70 leading-relaxed">Vayzilo is being designed to make vacation rentals easier to discover and compare through the next generation of AI-powered travel assistants.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Host CTA -->
-  <section id="hosts" class="bg-dark text-white py-16">
-    <div class="max-w-3xl mx-auto px-4 text-center">
-      <h2 class="text-3xl font-bold">Ready to host on Vayzilo?</h2>
-      <p class="mt-3 text-gray-300">List your place in minutes. Keep more of what you earn. Connect with travelers who value quality.</p>
-      <button onclick="showHostForm()" class="mt-6 bg-accent hover:bg-amber-500 text-dark font-semibold px-8 py-3 rounded-full">List your space</button>
+  <!-- AI Discovery / Vision -->
+  <section id="vision" class="bg-ink text-white py-16 sm:py-24">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl sm:text-4xl font-bold tracking-tight">Travel Is Changing. We&rsquo;re Building for What&rsquo;s Next.</h2>
+      <p class="mt-6 text-lg text-white/80 leading-relaxed">More travelers are using AI to research destinations, compare accommodations, and plan trips.</p>
+      <p class="mt-4 text-lg text-white/80 leading-relaxed">Vayzilo is being built for that future. Our vision is to make independently hosted vacation rentals easier to discover through conversational search, with accurate property information, transparent pricing, and a direct path to booking.</p>
+      <p class="mt-8 text-sm text-white/50">AI assistant integrations are planned capabilities and are not yet available.</p>
+    </div>
+  </section>
+
+  <!-- Founding Hosts -->
+  <section id="founding-hosts" class="py-16 sm:py-24">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+        <div>
+          <h2 class="text-3xl sm:text-4xl font-bold tracking-tight">Help Build a Better Vacation Rental Marketplace.</h2>
+          <p class="mt-5 text-lg text-ink/70 leading-relaxed">Vayzilo is being created with independent hosts in mind.</p>
+          <p class="mt-4 text-lg text-ink/70 leading-relaxed">We&rsquo;re inviting experienced property owners and managers to help shape a marketplace that puts transparency, flexibility, and fair pricing first.</p>
+          <p class="mt-4 text-lg text-ink/70 leading-relaxed">Join our founding-host community and get early access as we develop the platform.</p>
+          <p class="mt-6 text-sm font-medium text-ink/50">Free to express interest. No obligation to list.</p>
+        </div>
+        <div class="bg-white rounded-2xl border border-ink/10 shadow-sm p-6 sm:p-8">
+          <h3 class="text-xl font-semibold">Become a Founding Host</h3>
+          <form id="host-form" class="mt-6 space-y-4" novalidate>
+            <div>
+              <label for="host-name" class="block text-sm font-medium mb-1.5">Name</label>
+              <input id="host-name" name="name" type="text" required autocomplete="name" class="w-full border border-ink/20 rounded-lg px-4 py-3 outline-none focus:border-primary bg-white" placeholder="Your name">
+            </div>
+            <div>
+              <label for="host-email" class="block text-sm font-medium mb-1.5">Email address</label>
+              <input id="host-email" name="email" type="email" required autocomplete="email" class="w-full border border-ink/20 rounded-lg px-4 py-3 outline-none focus:border-primary bg-white" placeholder="you@example.com">
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label for="host-city" class="block text-sm font-medium mb-1.5">City</label>
+                <input id="host-city" name="city" type="text" required autocomplete="address-level2" class="w-full border border-ink/20 rounded-lg px-4 py-3 outline-none focus:border-primary bg-white" placeholder="City">
+              </div>
+              <div>
+                <label for="host-state" class="block text-sm font-medium mb-1.5">State</label>
+                <input id="host-state" name="state" type="text" required autocomplete="address-level1" class="w-full border border-ink/20 rounded-lg px-4 py-3 outline-none focus:border-primary bg-white" placeholder="State">
+              </div>
+            </div>
+            <div>
+              <label for="host-properties" class="block text-sm font-medium mb-1.5">Number of vacation rental properties</label>
+              <select id="host-properties" name="properties" required class="w-full border border-ink/20 rounded-lg px-4 py-3 outline-none focus:border-primary bg-white">
+                <option value="">Select one</option>
+                <option>1</option>
+                <option>2–5</option>
+                <option>6–20</option>
+                <option>21+</option>
+              </select>
+            </div>
+            <div>
+              <label for="host-wishes" class="block text-sm font-medium mb-1.5">What would make you try a new booking platform? <span class="text-ink/40 font-normal">(optional)</span></label>
+              <textarea id="host-wishes" name="wishes" rows="3" class="w-full border border-ink/20 rounded-lg px-4 py-3 outline-none focus:border-primary bg-white" placeholder="Tell us what matters to you"></textarea>
+            </div>
+            <button type="submit" class="w-full bg-primary text-white font-semibold py-3.5 rounded-full hover:bg-primarydark">Become a Founding Host</button>
+            <p class="form-status text-sm text-center hidden"></p>
+            <p class="text-xs text-ink/50 text-center">Expressing interest is not a property listing. We&rsquo;ll only email you about Vayzilo&rsquo;s launch. See our <a href="#" onclick="openPrivacy(event)" class="underline">privacy notice</a>.</p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Traveler Early Access -->
+  <section id="early-access" class="bg-primary/5 border-y border-ink/10 py-16 sm:py-24">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl sm:text-4xl font-bold tracking-tight">Be Among the First to Discover Vayzilo.</h2>
+      <p class="mt-5 text-lg text-ink/70">Unique homes. Independent hosts. Transparent pricing.</p>
+      <p class="mt-3 text-lg text-ink/70">Join our early-access list to be notified as Vayzilo prepares to launch.</p>
+      <form id="traveler-form" class="mt-9 text-left bg-white rounded-2xl border border-ink/10 shadow-sm p-6 sm:p-8 space-y-4" novalidate>
+        <div>
+          <label for="traveler-email" class="block text-sm font-medium mb-1.5">Email address</label>
+          <input id="traveler-email" name="email" type="email" required autocomplete="email" class="w-full border border-ink/20 rounded-lg px-4 py-3 outline-none focus:border-primary bg-white" placeholder="you@example.com">
+        </div>
+        <div>
+          <label for="traveler-destination" class="block text-sm font-medium mb-1.5">Where do you usually travel? <span class="text-ink/40 font-normal">(optional)</span></label>
+          <input id="traveler-destination" name="destination" type="text" class="w-full border border-ink/20 rounded-lg px-4 py-3 outline-none focus:border-primary bg-white" placeholder="e.g. Florida, the mountains, Europe">
+        </div>
+        <label class="flex items-start gap-3 text-sm text-ink/70">
+          <input id="traveler-consent" name="consent" type="checkbox" required class="mt-1 w-4 h-4 accent-[#0D716B]">
+          <span>Yes, email me about Vayzilo&rsquo;s launch and early access. I agree to the <a href="#" onclick="openPrivacy(event)" class="underline">privacy notice</a>.</span>
+        </label>
+        <button type="submit" class="w-full bg-primary text-white font-semibold py-3.5 rounded-full hover:bg-primarydark">Join the Traveler Waitlist</button>
+        <p class="form-status text-sm text-center hidden"></p>
+      </form>
     </div>
   </section>
 
   <!-- Footer -->
-  <footer class="bg-white border-t py-10">
-    <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-500">
+  <footer class="bg-cream py-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-ink/60">
       <div class="flex items-center gap-2">
         <div class="w-6 h-6 bg-primary rounded flex items-center justify-center"><span class="text-white text-xs font-bold">V</span></div>
-        <span class="font-medium text-gray-700">Vayzilo</span>
+        <span class="font-medium text-ink">Vayzilo</span>
       </div>
-      <div>© 2026 Vayzilo. All rights reserved. An alternative to traditional short-term rental platforms.</div>
+      <div class="text-center">© 2026 Vayzilo. All rights reserved. Vayzilo is in early development; bookings are not yet available.</div>
       <div class="flex gap-4">
-        <a href="#" class="hover:text-primary">Privacy</a>
-        <a href="#" class="hover:text-primary">Terms</a>
-        <a href="#" class="hover:text-primary">Support</a>
+        <a href="#" onclick="openPrivacy(event)" class="hover:text-primary">Privacy</a>
       </div>
     </div>
   </footer>
 
-  <!-- Detail Modal -->
+  <!-- Privacy Notice Modal -->
+  <div id="privacy-modal" class="fixed inset-0 bg-black/50 hidden z-50 overflow-y-auto">
+    <div class="min-h-screen flex items-center justify-center p-4">
+      <div class="bg-white rounded-2xl max-w-lg w-full p-8">
+        <h3 class="text-2xl font-bold mb-4">Privacy Notice</h3>
+        <div class="text-sm text-ink/70 space-y-3 leading-relaxed">
+          <p>Vayzilo is in early development. When you join our founding-host community or traveler waitlist, we collect the information you provide (such as your name, email address, city and state, number of properties, and your answers to optional questions).</p>
+          <p>We use this information only to contact you about Vayzilo&rsquo;s development and launch, and to understand what hosts and travelers want from the platform.</p>
+          <p>We do not sell your personal information. You can ask us to remove your information at any time by replying to any email we send.</p>
+          <p>This notice will be updated as the platform develops.</p>
+        </div>
+        <button onclick="closePrivacy()" class="mt-6 w-full bg-primary text-white py-3 rounded-lg font-medium">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Detail Modal (marketplace component, preserved for future listings) -->
   <div id="detail-modal" class="fixed inset-0 bg-black/50 hidden z-50 overflow-y-auto">
     <div class="min-h-screen flex items-center justify-center p-4">
       <div class="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
@@ -176,7 +256,7 @@
     </div>
   </div>
 
-  <!-- Auth Modal -->
+  <!-- Auth Modal (preserved for future accounts) -->
   <div id="auth-modal" class="fixed inset-0 bg-black/50 hidden z-50">
     <div class="min-h-screen flex items-center justify-center p-4">
       <div class="bg-white rounded-2xl max-w-md w-full p-8">
@@ -190,6 +270,71 @@
   </div>
 
   <script>
+    /* ============================================================
+       FORM CAPTURE CONFIG
+       GitHub Pages is static hosting, so form submissions need an
+       endpoint. Paste a form-backend URL (e.g. a Formspree form
+       endpoint) between the quotes and both forms will POST there
+       and show their confirmation messages. While this is empty,
+       the forms explain that registration is opening shortly and
+       do NOT pretend to save anything.
+       ============================================================ */
+    const FORM_ENDPOINT = "";
+
+    function wireForm(formId, kind) {
+      const form = document.getElementById(formId);
+      if (!form) return;
+      const status = form.querySelector('.form-status');
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        if (!form.checkValidity()) { form.reportValidity(); return; }
+        const data = Object.fromEntries(new FormData(form).entries());
+        data.form_type = kind;
+        if (!FORM_ENDPOINT) {
+          status.textContent = "Thank you for your interest! Registration is opening in the next few days — please check back shortly and we'll get you signed up.";
+          status.className = 'form-status text-sm text-center text-primary font-medium';
+          return;
+        }
+        try {
+          const res = await fetch(FORM_ENDPOINT, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+            body: JSON.stringify(data)
+          });
+          if (!res.ok) throw new Error('submit failed');
+          form.reset();
+          status.textContent = kind === 'host'
+            ? "Welcome aboard! You're on the founding-host list — we'll be in touch as early access opens."
+            : "You're on the list! We'll email you as Vayzilo prepares to launch.";
+          status.className = 'form-status text-sm text-center text-primary font-medium';
+        } catch (err) {
+          status.textContent = "Something went wrong submitting the form. Please try again in a moment.";
+          status.className = 'form-status text-sm text-center text-red-600 font-medium';
+        }
+      });
+    }
+    wireForm('host-form', 'host');
+    wireForm('traveler-form', 'traveler');
+
+    function openPrivacy(e) {
+      if (e) e.preventDefault();
+      document.getElementById('privacy-modal').classList.remove('hidden');
+    }
+    function closePrivacy() {
+      document.getElementById('privacy-modal').classList.add('hidden');
+    }
+    document.getElementById('privacy-modal').addEventListener('click', e => {
+      if (e.target.id === 'privacy-modal') closePrivacy();
+    });
+
+    /* ============================================================
+       MARKETPLACE COMPONENTS — preserved for future development.
+       The demonstration listings below are NOT displayed on the
+       public homepage while Vayzilo is in early development.
+       The search/listing/detail code is kept intact so real
+       listings can be switched on later. Do not render demo
+       properties, prices, ratings, or reviews publicly.
+       ============================================================ */
     const listings = [
       {
         id: 1,
@@ -303,12 +448,13 @@
     function renderListings(list) {
       const grid = document.getElementById('listings-grid');
       const noResults = document.getElementById('no-results');
+      if (!grid) return; // listings are not displayed on the launch homepage
       if (list.length === 0) {
         grid.innerHTML = '';
-        noResults.classList.remove('hidden');
+        if (noResults) noResults.classList.remove('hidden');
         return;
       }
-      noResults.classList.add('hidden');
+      if (noResults) noResults.classList.add('hidden');
       grid.innerHTML = list.map(l => `
         <div class="listing-card bg-white rounded-2xl overflow-hidden shadow-sm border hover:shadow-md cursor-pointer" onclick="openDetail(${l.id})">
           <div class="aspect-[4/3] overflow-hidden">
@@ -338,12 +484,16 @@
 
     function performSearch() {
       applyFilters();
-      document.getElementById('stays').scrollIntoView({ behavior: 'smooth' });
+      const stays = document.getElementById('stays');
+      if (stays) stays.scrollIntoView({ behavior: 'smooth' });
     }
 
     function applyFilters() {
-      const loc = document.getElementById('search-location').value.toLowerCase();
-      const guestsSelect = document.getElementById('search-guests').value;
+      const locEl = document.getElementById('search-location');
+      const guestsEl = document.getElementById('search-guests');
+      if (!locEl || !guestsEl) return; // search UI is not on the launch homepage
+      const loc = locEl.value.toLowerCase();
+      const guestsSelect = guestsEl.value;
       const minGuests = parseInt(guestsSelect) || 1;
 
       filteredListings = listings.filter(l => {
@@ -403,11 +553,8 @@
     }
 
     function showHostForm() {
-      alert('Host onboarding form would open here. In a full version, this leads to a multi-step listing creator.');
+      document.getElementById('founding-hosts').scrollIntoView({ behavior: 'smooth' });
     }
-
-    // Initial render
-    renderListings(listings);
 
     // Close modals on background click
     document.getElementById('detail-modal').addEventListener('click', e => {
