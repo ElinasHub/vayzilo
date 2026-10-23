@@ -301,15 +301,21 @@
        email to that inbox — it must be confirmed once before
        submissions start arriving.
        ============================================================ */
-    const FORM_ENDPOINT = "https://formsubmit.co/ajax/elinaglazer@gmail.com";
+    const FORM_ENDPOINT = "https://formsubmit.co/ajax/e411957d4711adcbd2dba8cf3b3baa9c";
 
     function wireForm(formId, kind) {
       const form = document.getElementById(formId);
       if (!form) return;
       const status = form.querySelector('.form-status');
+      const button = form.querySelector('button[type="submit"]');
       form.addEventListener('submit', async (e) => {
         e.preventDefault();
-        if (!form.checkValidity()) { form.reportValidity(); return; }
+        if (!form.checkValidity()) {
+          status.textContent = "Please complete the required fields above, then try again.";
+          status.className = 'form-status text-sm text-center text-red-600 font-medium';
+          form.reportValidity();
+          return;
+        }
         const data = Object.fromEntries(new FormData(form).entries());
         data.form_type = kind;
         data._subject = kind === 'host'
@@ -322,13 +328,19 @@
           status.className = 'form-status text-sm text-center text-primary font-medium';
           return;
         }
+        const originalText = button.textContent;
+        button.disabled = true;
+        button.textContent = "Sending…";
+        status.textContent = "";
+        status.className = 'form-status text-sm text-center hidden';
         try {
           const res = await fetch(FORM_ENDPOINT, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
             body: JSON.stringify(data)
           });
-          if (!res.ok) throw new Error('submit failed');
+          const result = await res.json().catch(() => ({}));
+          if (!res.ok || result.success === 'false' || result.success === false) throw new Error('submit failed');
           form.reset();
           status.textContent = kind === 'host'
             ? "Welcome aboard! You're on the founding-host list — we'll be in touch as early access opens."
@@ -337,6 +349,9 @@
         } catch (err) {
           status.textContent = "Something went wrong submitting the form. Please try again in a moment.";
           status.className = 'form-status text-sm text-center text-red-600 font-medium';
+        } finally {
+          button.disabled = false;
+          button.textContent = originalText;
         }
       });
     }
